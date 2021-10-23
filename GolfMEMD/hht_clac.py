@@ -7,7 +7,7 @@ Created on Sat Oct 23 14:40:14 2021
 """
 
 from MEMD_all import memd
-from bvh
+import  bvh
 import ht
 import numpy as np
 from matplotlib import pyplot as plt
@@ -30,4 +30,6 @@ def hilbert_transform(imf, dt, joint:int):
     t = np.linspace(0, dt*n, n)
     
     m = result.shape[0] - 1
+    n = result.shape[1]
+    freq, amp = ht.FAhilbert(result, dt)
     
