@@ -14,7 +14,7 @@ from MEMD_all import wafa
 from MEMD_all import hhtplot
 import ht as hs
 
-path = './data/golf/0408/noGChange_Take_001.bvh'
+path = '../data/0914/18th_shots_Take_001.bvh'
 #path = './data/golf/CMUGolf.bvh'
 [data, fs, text] = bvh.bvhreader(path)
 
