@@ -10,6 +10,7 @@ from MEMD_all import memd
 import  bvh
 import ht
 import numpy as np
+from numpy import linalg as LA
 from matplotlib import pyplot as plt
 import os
 import copy
@@ -67,6 +68,7 @@ if __name__ == '__main__':
     # joint_list = [j.hip, j.left_shoulder, j.left_arm, j.left_fore_arm]
     joint_list = [j.hip, j.left_shoulder, j.left_arm, j.left_fore_arm]
     
+    # calculation memd -> memdの計算
     imf_list = []
     dt_list = []
     for file in dir_list:
@@ -84,6 +86,22 @@ if __name__ == '__main__':
         freq, amp = hilbert_transform(imf_list[imf_num], dt_list[imf_num], joint_list)
         freq_list.append(freq)
         amp_list.append(amp)
+
+    # 時系列における平均周波数と平均振幅
+    # 平均振幅は，平均値の計算ではなく3軸方向におけるノルム値
+    # √x_t^2 + y_t^2 + z_t^2
+    freq_list_time = []
+    amp_list_time = []
+    for data_n in range(len(freq_list)):
+        freq = freq_list[data_n]
+        amp = amp_list[data_n]
+        
+        freq_mean = np.mean(freq, axis=0)
+        amp_mean = LA.norm(amp, axis=0)
+
+        freq_list_time.append(freq_mean)
+        amp_list_time.append(amp_mean)
+
     
     
     # freq_listから周波数平均を取るデータをfreqで指定
@@ -119,12 +137,16 @@ if __name__ == '__main__':
     # average_frequency_list = np.array(average_frequency_list)
     freq_list_copy = copy.copy(average_frequency_list)
 
+    # average_frequency_listとNodの差分を計算して，最小のインデックスを取得する
+    '''
+    # この実装は時間がかかるので，今後実装の目処を立てる．
     for freq_i in freq_list_copy:
         for joint_i in freq_i:
             for Nod in joint_i:
                 # get index for argmin -> Nodとaverage_frequency_listで一番誤差が小さいもののインデックスを取得する．
                 idx = np.argmin(np.abs(average_frequency_list - Nod))
                 print(idx)
+    '''
 
     
     # imf, dt = memd_calc(data_path)
