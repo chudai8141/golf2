@@ -66,7 +66,7 @@ if __name__ == '__main__':
     
     j = Joint()
     # joint_list = [j.hip, j.left_shoulder, j.left_arm, j.left_fore_arm]
-    joint_list = [j.hip, j.left_shoulder, j.left_arm, j.left_fore_arm]
+    joint_list = [j.hip]
     
     # calculation memd -> memdの計算
     imf_list = []
@@ -79,6 +79,9 @@ if __name__ == '__main__':
     # imf_list = np.array(imf_list, dtype=np.float64)
     imf_list = np.array(imf_list)
 
+    # setting dt 120Hz
+    dt = 1 /120
+
     freq_list = []
     amp_list = []
     # hht start 
@@ -90,20 +93,52 @@ if __name__ == '__main__':
     # 時系列における平均周波数と平均振幅
     # 平均振幅は，平均値の計算ではなく3軸方向におけるノルム値
     # √x_t^2 + y_t^2 + z_t^2
-    freq_list_time = []
-    amp_list_time = []
-    for data_n in range(len(freq_list)):
-        freq = freq_list[data_n]
-        amp = amp_list[data_n]
-        
-        freq_mean = np.mean(freq, axis=0)
-        amp_mean = LA.norm(amp, axis=0)
+    freq_list_time = [] # 平均周波数
+    amp_list_time = [] # ノルム振幅
+    for select_freq_data, select_amp_data in zip(freq_list, amp_list):
+        freq_mean_list = []
+        amp_mean_list = []
+        for select_freq_joint, select_amp_joint in zip(select_freq_data, select_amp_data):
+            freq_mean = np.mean(select_freq_joint, axis=0)
+            amp_mean = LA.norm(select_amp_joint, axis=0)
 
-        freq_list_time.append(freq_mean)
-        amp_list_time.append(amp_mean)
+            freq_mean_list.append(freq_mean)
+            amp_mean_list.append(amp_mean)
 
+        freq_mean_list = np.array(freq_mean_list)
+        amp_mean_list = np.array(amp_mean_list)
+
+        freq_list_time.append(freq_mean_list)
+        amp_list_time.append(amp_mean_list)
     
-    
+    # list -> numpy -> 描画するときにfor分で取り出せばnumpyの配列として取り出せる．
+    # freq_list_time = np.array(freq_list_time)
+    # amp_list_time = np.array(amp_list_time)
+
+    # スペクトルグラムの描画
+    for select_freq_data, select_amp_data in zip(freq_list_time, amp_list_time):
+        for select_freq_joint, select_amp_joint in zip(select_freq_data, select_amp_data):
+            # そのデータのNodとframeを取得する．
+            Nod = select_freq_joint.shape[0]
+            frame = select_freq_joint.shape[1]
+            spectrum_time = np.zeros((Nod, frame))
+            for n in range(Nod):
+                spectrum_time[n, :] = np.linspace(0, dt*frame, frame)
+            plt.clf()
+            plt.figure(dpi=200, figsize=(16,9))
+            plt.rcParams["font.family"] = "Times New Roman" 
+            plt.rcParams["font.size"] = 30
+            # 
+            for n in range(Nod):
+                plt.scatter(spectrum_time[n, :], select_freq_joint[n, :], s=10, c=select_amp_joint[n, :frame], cmap='jet')
+            
+            plt.xlabel('time(s)')        #x軸に名前をつける
+            plt.ylabel('frequency(Hz)') #y軸に名前をつける
+            plt.colorbar()
+            plt.show()
+
+    '''
+    必要な時にコメントアウトを外す．
     # freq_listから周波数平均を取るデータをfreqで指定
     average_frequency_list = []
     for freq in freq_list:
@@ -136,6 +171,7 @@ if __name__ == '__main__':
         average_frequency_list.append(np.array(average_frequency))
     # average_frequency_list = np.array(average_frequency_list)
     freq_list_copy = copy.copy(average_frequency_list)
+    '''
 
     # average_frequency_listとNodの差分を計算して，最小のインデックスを取得する
     '''
