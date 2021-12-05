@@ -50,6 +50,32 @@ def hilbert_transform(imf, dt, joint_list):
         amp_list.append(amp_joint)
     return freq_list, amp_list
 
+def spectrum_plot(freq_list, amp_list, dt):
+    for select_freq_data, select_amp_data in zip(freq_list, amp_list):
+        for select_freq_joint, select_amp_joint in zip(select_freq_data, select_amp_data):
+            # そのデータのNodとframeを取得する．
+            Nod = select_freq_joint.shape[0]
+            frame = select_freq_joint.shape[1]
+            spectrum_time = np.zeros((Nod, frame))
+            for n in range(Nod):
+                spectrum_time[n, :] = np.linspace(0, dt*frame, frame)
+            plt.clf()
+            plt.figure(dpi=200, figsize=(16,9))
+            plt.rcParams["font.family"] = "Times New Roman" 
+            plt.rcParams["font.size"] = 30
+            # 
+            for n in range(3, Nod):
+                plt.scatter(spectrum_time[n, :], select_freq_joint[n, :], s=100, c=select_amp_joint[n, :frame], cmap='jet')
+                plt.clim(0, 1)
+            ax = plt.gca()
+            ax.set_facecolor([0.0,0.0,0.5])
+            plt.ylim(0, 10)
+            plt.xlabel('time(s)')
+            plt.ylabel('frequency(Hz)')
+            plt.colorbar()
+            plt.show()
+
+
     
 if __name__ == '__main__':
     # data_path = '../data/1111/straight_1_Take_001.bvh'
@@ -64,6 +90,7 @@ if __name__ == '__main__':
     straight_4 = 228
     impact_list = [straight_1, straight_2, straight_3, straight_4]
     
+    # select joint
     j = Joint()
     # joint_list = [j.hip, j.left_shoulder, j.left_arm, j.left_fore_arm]
     joint_list = [j.hip]
@@ -80,7 +107,7 @@ if __name__ == '__main__':
     imf_list = np.array(imf_list)
 
     # setting dt 120Hz
-    dt = 1 /120
+    dt = 1 / 120
 
     freq_list = []
     amp_list = []
@@ -95,6 +122,9 @@ if __name__ == '__main__':
     # √x_t^2 + y_t^2 + z_t^2
     freq_list_time = [] # 平均周波数
     amp_list_time = [] # ノルム振幅
+
+    freq_list_mean = []
+    amp_list_mean = []
     for select_freq_data, select_amp_data in zip(freq_list, amp_list):
         freq_mean_list = []
         amp_mean_list = []
@@ -102,20 +132,40 @@ if __name__ == '__main__':
             freq_mean = np.mean(select_freq_joint, axis=0)
             amp_mean = LA.norm(select_amp_joint, axis=0)
 
+            amp_mean = (amp_mean - np.min(amp_mean)) / (np.max(amp_mean) - np.min(amp_mean))
+
             freq_mean_list.append(freq_mean)
             amp_mean_list.append(amp_mean)
+
+            freq_list_mean.append(freq_mean)
+            amp_list_mean.append(amp_mean)
+        
+        # amp_mean_list = (amp_mean_list - np.min(amp_mean_list)) / (np.max(amp_mean_list) - np.min(amp_mean_list))
 
         freq_mean_list = np.array(freq_mean_list)
         amp_mean_list = np.array(amp_mean_list)
 
         freq_list_time.append(freq_mean_list)
         amp_list_time.append(amp_mean_list)
-    
+
+    spectrum_plot(freq_list_time, amp_list_time, dt)
+
+    data_list = [[0]] * len(joint_list)
+    for select_freq_data, select_amp_data in zip (freq_list_time, amp_list_time):
+        hoge = [[0]] * len(select_freq_data)
+        #for select_freq_joint, select_amp_joint in zip(select_freq_data, select_amp_data):
+        for joint_n in range(len(joint_list)):
+            select_freq_data[joint_n]
+
+
+
     # list -> numpy -> 描画するときにfor分で取り出せばnumpyの配列として取り出せる．
     # freq_list_time = np.array(freq_list_time)
     # amp_list_time = np.array(amp_list_time)
 
     # スペクトルグラムの描画
+
+    '''
     for select_freq_data, select_amp_data in zip(freq_list_time, amp_list_time):
         for select_freq_joint, select_amp_joint in zip(select_freq_data, select_amp_data):
             # そのデータのNodとframeを取得する．
@@ -129,13 +179,17 @@ if __name__ == '__main__':
             plt.rcParams["font.family"] = "Times New Roman" 
             plt.rcParams["font.size"] = 30
             # 
-            for n in range(Nod):
-                plt.scatter(spectrum_time[n, :], select_freq_joint[n, :], s=10, c=select_amp_joint[n, :frame], cmap='jet')
-            
-            plt.xlabel('time(s)')        #x軸に名前をつける
-            plt.ylabel('frequency(Hz)') #y軸に名前をつける
+            for n in range(3, Nod):
+                plt.scatter(spectrum_time[n, :], select_freq_joint[n, :], s=100, c=select_amp_joint[n, :frame], cmap='jet')
+                plt.clim(0, 1)
+            ax = plt.gca()
+            ax.set_facecolor([0.0,0.0,0.5])
+            plt.ylim(0, 10)
+            plt.xlabel('time(s)')
+            plt.ylabel('frequency(Hz)')
             plt.colorbar()
             plt.show()
+    '''
 
     '''
     必要な時にコメントアウトを外す．
