@@ -12,8 +12,8 @@ class User():
     
     def __init__(self, username: str, set_joint: Dict[int, str], ballistic: str, impact_list: List[int], last_frame: int):
         self.user = username
-        self.joint = set_joint
-        self.joint_name = set_joint
+        self.joint = set_joint['j_num']
+        self.joint_name = set_joint['j_name']
         self.ballistic = ballistic # ballistic -> 弾道の意味
         self.impact_list = impact_list
         self.last_frame = last_frame
@@ -27,8 +27,8 @@ class User():
             os.mkdir(os.path.join(self.output_dir, self.user))
         if not os.path.isdir(os.path.join(self.output_dir, self.user, self.ballistic)):
             os.mkdir(os.path.join(self.output_dir, self.user, self.ballistic))
-        if not os.path.isdir(os.path.join(self.output_dir, self.user, self.ballistic, self.joint)):
-            os.mkdir(os.path.join(self.output_dir, self.user, self.ballistic, self.joint))
+        if not os.path.isdir(os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name)):
+            os.mkdir(os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name))
         save_path = os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name)
         print(save_path)
     
