@@ -17,7 +17,7 @@ class User():
         self.ballistic = ballistic # ballistic -> 弾道の意味
         self.impact_list = impact_list
         self.last_frame = last_frame
-        self.output(self, output_dir='output_image')
+        self.output(output_dir='output_image')
     
     def output(self, output_dir='output_image'):
         self.output_dir = output_dir
