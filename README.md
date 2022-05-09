@@ -1,3 +1,0 @@
-editing now ...
-
-please wait ...!
