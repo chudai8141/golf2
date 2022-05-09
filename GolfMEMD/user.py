@@ -10,8 +10,8 @@ from joint import Joint
 
 class User():
     
-    def __init__(self, username: str, set_joint: Dict[int, str], ballistic: str, impact_list: List[int], last_frame: int):
-        self.user = username
+    def __init__(self, user_name: str, set_joint: Dict[int, str], ballistic: str, impact_list: List[int], last_frame: int):
+        self.user = user_name
         self.joint = set_joint['j_num']
         self.joint_name = set_joint['j_name']
         self.ballistic = ballistic # ballistic -> 弾道の意味
