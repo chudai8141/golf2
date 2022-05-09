@@ -1,11 +1,13 @@
 import os
 import copy
+from typing import Union, List
 
 import numpy as np
 from numpy import linalg as LA
 from matplotlib import pyplot as plt
 
 from user import User
+import user_setting
 from MEMD_all import memd
 import bvh
 import ht
@@ -39,8 +41,9 @@ class MultEmpModeDeco:
         
 
 class HilbertTrans:
-    def __init__(self, result_memd: MultEmpModeDeco):
+    def __init__(self, result_memd: MultEmpModeDeco, select_data: Union[user_setting.Kimura, user_setting.Sugawara]):
         self.result = result_memd
+        self.select_data = select_data
         self.hilbert_transform()
 
     def hilbert_transform(self):
@@ -57,4 +60,35 @@ class HilbertTrans:
         self.amp_list = np.array([self.amp_x, self.amp_z, self.amp_y])
         self.freq_mean = np.mean(self.freq_list, axis=0)
         self.amp_norm = LA.norm(self.amp_list, axis=0)
+        self.Nod = self.freq_mean.shape[0]
+        
+    def set_freq_data(self, Nod: int, impact_number: str):
+        self.freq_data = self.freq_mean[
+            :Nod,
+            self.select_data[impact_number] - self.select_data['min_frame'] : self.select_data[impact_number] + self.select_data['follor_throught']]
 
+    def set_amp_data(self, Nod: int, impact_number: str):
+        self.amp_data = self.amp_norm[
+            :Nod,
+            self.select_data[impact_number] - self.select_data['min_frame'] : self.select_data[impact_number] + self.select_data['follor_throught']]
+
+
+def freq_amp_mean_norm(result_hilbert_list: List):
+    freq_list = []
+    amp_list = []
+    for data in result_hilbert_list:
+        freq_list.append(data.freq_data)
+        amp_list.append(data.amp_data)
+    
+    freq_all_data = sum(freq_list) / len(freq_list)
+    amp_all_data = sum(amp_list) / len(amp_list)
+    amp_norm_data = (amp_all_data - np.min(amp_all_data)) / (np.max(amp_all_data) - np.min(amp_all_data))
+
+    return freq_all_data, amp_norm_data
+
+def create_spectrum_time(Nod, frame, dt):
+    spectrum_time = np.zeros((Nod, frame))
+    for n in range(Nod):
+        spectrum_time[n, :] = np.linspace(0, dt*frame, frame)
+    
+    return spectrum_time
