@@ -42,9 +42,6 @@ class HilbertTrans:
     def __init__(self, result_memd: MultEmpModeDeco):
         self.result = result_memd
         self.hilbert_transform()
-        self.freq_list = np.array([self.freq_x, self.freq_z, self.freq_y])
-        self.amp_list = np.array([self.amp_x, self.amp_z, self.amp_y])
-
 
     def hilbert_transform(self):
         self.freq_x, self.amp_x = ht.FAhilbert(self.result.result_x, self.result.dt)
@@ -56,6 +53,8 @@ class HilbertTrans:
 
     def calc_means_norm(self):
         # calculation frequency average from freq_list and, amplitude normalize from amp_list
+        self.freq_list = np.array([self.freq_x, self.freq_z, self.freq_y])
+        self.amp_list = np.array([self.amp_x, self.amp_z, self.amp_y])
         self.freq_mean = np.mean(self.freq_list, axis=0)
         self.amp_norm = LA.norm(self.amp_list, axis=0)
 
