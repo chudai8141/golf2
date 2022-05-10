@@ -66,13 +66,11 @@ class HilbertTrans:
         self.freq_data = self.freq_mean[
             :Nod,
             self.select_data[impact_number] - self.select_data['min_frame'] : self.select_data[impact_number] + self.select_data['follor_throught']]
-        print(self.freq_data.shape)
 
     def set_amp_data(self, Nod: int, impact_number: str):
         self.amp_data = self.amp_norm[
             :Nod,
             self.select_data[impact_number] - self.select_data['min_frame'] : self.select_data[impact_number] + self.select_data['follor_throught']]
-        print(self.amp_data.shape)
 
 
 def freq_amp_mean_norm(result_hilbert_list: List):
