@@ -1,4 +1,5 @@
 # user setting for data, impact flame
+import numpy as np
 
 
 impact_number = ['first_impact', 'second_impact', 'third_impact', 'fourth_impact']
@@ -45,15 +46,21 @@ class Sugawara:
             'first_impact' : 215,
             'second_impact' : 180,
             'third_impact' : 210,
-            'min_frame' : 180,
-            'impact_list' : [215, 180, 210],
-            'follor_throught' : 233,
+            'finish' : 233,
             'data_path' : [
                 '../data/sugawara/slice_data/singlePlane_slice01_Take_001.bvh',
                 '../data/sugawara/slice_data/singlePlane_slice02_Take_001.bvh',
                 '../data/sugawara/slice_data/singlePlane_slice03_Take_001.bvh'    
             ]
         }
+
+        self.slice_data['impact_list'] = np.array([
+            self.slice_data['first_impact'],
+            self.slice_data['second_impact'],
+            self.slice_data['third_impact']
+            ])
+        self.slice_data['min_frame'] = np.min(self.slice_data['impact_list'])
+        self.slice_data['follor_throught'] = self.slice_data['finish'] - self.slice_data['min_frame']
 
 
 
