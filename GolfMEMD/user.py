@@ -30,7 +30,7 @@ class User():
         if not os.path.isdir(os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name)):
             os.mkdir(os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name))
         self.save_path = os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name)
-    
+
     def _update_joint(self, select_joint):
         self.joint = select_joint
 
