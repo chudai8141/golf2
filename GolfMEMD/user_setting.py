@@ -41,6 +41,7 @@ class Kimura:
 
 class Sugawara:
     def __init__(self):
+        self.user_name = 'sugawara'
         self.slice_data = {
             'select_data' : 'slice_data',
             'first_impact' : 215,
