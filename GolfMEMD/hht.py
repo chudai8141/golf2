@@ -34,6 +34,9 @@ class MultEmpModeDeco:
         self.result_x = self.imf[:, self.joint, :]
         self.result_z = self.imf[:, self.joint+1, :]
         self.result_y = self.imf[:, self.joint+2, :]
+
+    def output_imf_bvh():
+        pass
         
 
 class HilbertTrans:
