@@ -1,12 +1,8 @@
-import os
-import copy
 from typing import Union, List
 
 import numpy as np
 from numpy import linalg as LA
-from matplotlib import pyplot as plt
 
-from user import User
 import user_setting
 from MEMD_all import memd
 import bvh
@@ -38,6 +34,9 @@ class MultEmpModeDeco:
         self.result_x = self.imf[:, self.joint, :]
         self.result_z = self.imf[:, self.joint+1, :]
         self.result_y = self.imf[:, self.joint+2, :]
+
+    def output_imf_bvh(self):
+        pass
         
 
 class HilbertTrans:
