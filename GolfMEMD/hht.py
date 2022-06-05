@@ -35,7 +35,11 @@ class MultEmpModeDeco:
         self.result_z = self.imf[:, self.joint+1, :]
         self.result_y = self.imf[:, self.joint+2, :]
 
+<<<<<<< Updated upstream
     def output_imf_bvh():
+=======
+    def output_imf_bvh(self):
+>>>>>>> Stashed changes
         pass
         
 
