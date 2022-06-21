@@ -31,5 +31,5 @@ def plot(
     plt.ylabel('frequency [Hz]')
     plt.colorbar()
     file_name = '_'.join(imf_name[start:end])
-    print('save figure', os.path.join(save_path, file_name) )
+    # print('save figure', os.path.join(save_path, file_name) )
     plt.savefig(os.path.join(save_path, file_name))
