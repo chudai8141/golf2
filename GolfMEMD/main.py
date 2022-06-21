@@ -1,7 +1,7 @@
 from tqdm import tqdm
 
 from joint import Joint
-from user_setting import impact_number, Sugawara, Kimura
+from user_setting import impact_number, Sugawara, Kimura, Hishiyama
 from user import User
 from hht import get_data, MultEmpModeDeco, HilbertTrans, freq_amp_mean_norm, create_spectrum_time
 from plot import plot
@@ -9,13 +9,14 @@ from plot import plot
 
 set_joint = Joint().hip
 
-select_data = Sugawara().slice_data
+select_user = Hishiyama()
+select_data = select_user.half_straight_data
 ballistic = select_data['select_data']
 impact_list = select_data['impact_list']
 follor_throught = select_data['follor_throught']
 
 output = 'output_image'
-user_name = 'sugawara'
+user_name = select_user.user_name
 user = User(
     user_name=user_name,
     set_joint=set_joint,
