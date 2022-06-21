@@ -83,3 +83,47 @@ class Sugawara:
         self.straight_data['follor_throught'] = self.straight_data['finish'] - self.straight_data['min_frame']
 
 
+class Hishiyama:
+    def __init__(self) -> None:
+        self.user_name = 'hishiyama'
+        self.half_slice_data = {
+            'select_data' : 'half_slice',
+            'first_impact' : 175,
+            'second_impact' : 152,
+            'finish' : 287,
+            'data_path' : [
+                '../data/hishiyama/half_swing/slice_data/half_swing_first_Take_001.bvh',
+                '../data/hishiyama/half_swing/slice_data/half_swing_second_Take_001.bvh'
+            ]
+        }
+        self.half_slice_data['impact_list'] = np.array([
+            self.half_slice_data['first_impact'],
+            self.half_slice_data['second_impact']
+        ])
+        self.half_slice_data['min_frame'] = np.min(self.half_slice_data['impact_list'])
+        self.half_slice_data['follor_throught'] = self.half_slice_data['finish'] - self.half_slice_data['min_frame']
+
+        self.half_straight_data = {
+            'select_data' : 'half_straight',
+            'first_impact' : 170,
+            'second_impact' : 163,
+            'third_impact' : 134,
+            'fourth_impact' : 199,
+            'finish' : 166,
+            'data_path' : [
+                '../data/hishiyama/half_swing/straight_data/half_swing_first_Take_001.bvh',
+                '../data/hishiyama/half_swing/straight_data/half_swing_fourth_Take_001.bvh',
+                '../data/hishiyama/half_swing/straight_data/half_swing_second_Take_001.bvh',
+                '../data/hishiyama/half_swing/straight_data/half_swing_third_Take_001.bvh'
+            ]
+        }
+        self.half_straight_data['impact_list'] = np.array([
+            self.half_straight_data['first_impact'],
+            self.half_straight_data['second_impact'],
+            self.half_straight_data['third_impact'],
+            self.half_straight_data['fourth_impact']
+        ])
+        self.half_straight_data['min_frame'] = np.min(self.half_straight_data['impact_list'])
+        self.half_straight_data['follor_throught'] = self.half_straight_data['finish'] - self.half_straight_data['min_frame']
+
+
