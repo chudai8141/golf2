@@ -94,7 +94,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input', help='input bvh file data')
+    parser.add_argument('-i', '--input', help='input bvh file data', default=None)
     parser.add_argument('-o', '--output', help='output path', default='output_image')
     parser.add_argument('-j', '--joint', help='select joint', choices=list(Joint().joint.keys()))
     parser.add_argument('-u', '--user', help='choice the user want to analyze s', choices=user_list)
