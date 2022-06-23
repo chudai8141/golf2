@@ -21,7 +21,7 @@ class Joint:
       RightHandThumb1 = 54
       RightHandThumb2 = 57
       RightHandThumb3 = 60
-      RightInHand = 63
+      RightInHandIndex = 63
       RightHandIndex1 = 66
       RightHandIndex2 = 69
       RightHandIndex3 = 72
@@ -49,9 +49,9 @@ class Joint:
       LeftHandIndex2 = 138
       LeftHandIndex3 = 141
       LeftInHandMiddle = 144
-      LeftInHandMiddle1 = 147
-      LeftInHandMiddle2 = 150
-      LeftInHandMiddle3 = 153
+      LeftHandMiddle1 = 147
+      LeftHandMiddle2 = 150
+      LeftHandMiddle3 = 153
       LeftInHandRing = 156
       LeftHandRing1 = 159
       LeftHandRing2 = 162
@@ -81,7 +81,7 @@ class Joint:
       self.right_hand_thumb1 = {'j_num': RightHandThumb1, 'j_name': 'right_hand_thumb1'}
       self.right_hand_thumb2 = {'j_num': RightHandThumb2, 'j_name': 'right_hand_thumb2'}
       self.right_hand_thumb3 = {'j_num': RightHandThumb3, 'j_name': 'right_hand_thumb3'}
-      self.right_in_hand = {'j_num': RightInHand, 'j_name': 'right_in_hand'}
+      self.right_in_hand_index = {'j_num': RightInHandIndex, 'j_name': 'right_in_hand_index'}
       self.right_hand_index1 = {'j_num': RightHandIndex1, 'j_name': 'right_hand_index1'}
       self.right_hand_index2 = {'j_num': RightHandIndex2, 'j_name': 'right_hand_index2'}
       self.right_hand_index3 = {'j_num': RightHandIndex3, 'j_name': 'right_hand_index3'}
@@ -96,7 +96,7 @@ class Joint:
       self.right_in_hand_pinky = {'j_num': RightInHandPinky, 'j_name': 'right_in_hand_pinky'}
       self.right_hand_pinky1 = {'j_num': RightHandPinky1, 'j_name': 'right_hand_pinky1'}
       self.right_hand_pinky2 = {'j_num': RightHandPinky2, 'j_name': 'right_hand_pinky2'}
-      self.right_hand_pinky3 = {'j_num': RightHandPinky3, 'j_name': 'right_hand_pinky3'}
+      self.right_hand_pinky3 = {'j_num': RightHandPinky3, 'j_name': 'right_hand_pinky3'}      
       self.left_shoulder = {'j_num': LeftShoulder, 'j_name': 'left_shoulder'}
       self.left_arm = {'j_num': LeftArm, 'j_name': 'left_arm'}
       self.left_fore_arm = {'j_num': LeftForeArm, 'j_name': 'left_fore_arm'}
@@ -109,9 +109,9 @@ class Joint:
       self.left_hand_index2 = {'j_num': LeftHandIndex2, 'j_name': 'left_hand_index2'}
       self.left_hand_index3 = {'j_num': LeftHandIndex3, 'j_name': 'left_hand_index3'}
       self.left_in_hand_middle = {'j_num': LeftInHandMiddle, 'j_name': 'left_in_hand_middle'}
-      self.left_in_hand_middle1 = {'j_num': LeftInHandMiddle1, 'j_name': 'left_in_hand_middle1'}
-      self.left_in_hand_middle2 = {'j_num': LeftInHandMiddle2, 'j_name': 'left_in_hand_middle2'}
-      self.left_in_hand_middle3 = {'j_num': LeftInHandMiddle3, 'j_name': 'left_in_hand_middle3'}
+      self.left_hand_middle1 = {'j_num': LeftHandMiddle1, 'j_name': 'left_in_hand_middle1'}
+      self.left_hand_middle2 = {'j_num': LeftHandMiddle2, 'j_name': 'left_in_hand_middle2'}
+      self.left_hand_middle3 = {'j_num': LeftHandMiddle3, 'j_name': 'left_in_hand_middle3'}
       self.left_in_hand_ring = {'j_num': LeftInHandRing, 'j_name': 'left_in_hand_ring'}
       self.left_hand_ring1 = {'j_num': LeftHandRing1, 'j_name': 'left_hand_ring1'}
       self.left_hand_ring2 = {'j_num': LeftHandRing2, 'j_name': 'left_hand_ring2'}
