@@ -1,4 +1,6 @@
 # user setting for data, impact flame
+import sys
+
 import numpy as np
 
 
@@ -126,4 +128,15 @@ class Hishiyama:
         self.half_straight_data['min_frame'] = np.min(self.half_straight_data['impact_list'])
         self.half_straight_data['follor_throught'] = self.half_straight_data['finish'] - self.half_straight_data['min_frame']
 
+
+def choice_user(user_name : str) -> object:
+    if user_name == 'kimura':
+        return Kimura
+    if user_name == 'sugawara':
+        return Sugawara
+    if user_name == 'hishiyama':
+        return Hishiyama
+    if user_name is None:
+        print('choice user')
+        sys.exit()
 
