@@ -23,6 +23,15 @@ class Kimura:
                 './data/1111/slice_data/slice_4_Take_001.bvh'
             ]
         }
+        self.slice_data['impact_list'] = np.array([
+            self.slice_data['first_impact'],
+            self.slice_data['second_impact'],
+            self.slice_data['third_impact'],
+            self.slice_data['fourth_impact']
+            ])
+        self.slice_data['min_frame'] = np.min(self.slice_data['impact_list'])
+        self.slice_data['follor_throught'] = self.slice_data['finish'] - self.slice_data['min_frame']
+
 
         self.straight_data = {
             'select_data' : 'straight_data',
@@ -39,6 +48,21 @@ class Kimura:
                 './data/1111/straight_data/straight_4_Take_001.bvh'
             ]
         }
+        self.straight_data['impact_list'] = np.array([
+            self.straight_data['first_impact'],
+            self.straight_data['second_impact'],
+            self.straight_data['third_impact'],
+            self.straight_data['fourth_impact']
+        ])
+        self.straight_data['min_frame'] = np.min(self.straight_data['impact_list'])
+        self.straight_data['follor_throught'] = self.straight_data['finish'] - self.straight_data['min_frame']
+
+        self.select_data = {
+            'straight_data' : self.straight_data,
+            'slice_data' : self.slice_data
+        }
+
+
 
 
 class Sugawara:
@@ -83,6 +107,11 @@ class Sugawara:
         ])
         self.straight_data['min_frame'] = np.min(self.straight_data['impact_list'])
         self.straight_data['follor_throught'] = self.straight_data['finish'] - self.straight_data['min_frame']
+
+        self.select_data = {
+            'straight_data' : self.straight_data,
+            'slice_data' : self.slice_data
+        }
 
 
 class Hishiyama:
