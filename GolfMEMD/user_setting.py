@@ -5,6 +5,7 @@ import numpy as np
 
 
 impact_number = ['first_impact', 'second_impact', 'third_impact', 'fourth_impact']
+user_list = ['kimura', 'sugawara', 'hishiyama']
 
 class Kimura:
     def __init__(self):

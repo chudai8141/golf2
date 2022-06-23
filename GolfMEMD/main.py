@@ -3,22 +3,22 @@ import argparse
 from tqdm import tqdm
 
 from joint import Joint
-from user_setting import impact_number, Sugawara, Kimura, Hishiyama
+from user_setting import impact_number, user_list ,choice_user
 from user import User
 from hht import get_data, MultEmpModeDeco, HilbertTrans, freq_amp_mean_norm, create_spectrum_time
 from plot import plot
 
 def main(args):
-    joint = args.joint
-    set_joint = Joint().joint[joint]
+    output = args.output
+    _joint = args.joint
+    select_user = choice_user(args.user)
 
-    select_user = Hishiyama()
+    set_joint = Joint().joint[_joint]
     select_data = select_user.half_straight_data
     ballistic = select_data['select_data']
     impact_list = select_data['impact_list']
     follor_throught = select_data['follor_throught']
 
-    output = 'output_image'
     user_name = select_user.user_name
     user = User(
         user_name=user_name,
@@ -97,5 +97,6 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--input', help='input bvh file data')
     parser.add_argument('-o', '--output', help='output path', default='output_image')
     parser.add_argument('-j', '--joint', help='select joint', choices=list(Joint().joint.keys()))
+    parser.add_argument('-u', '--user', help='choice the user want to analyze s', choices=user_list)
     args = parser.parse_args()
     main(args)
