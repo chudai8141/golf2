@@ -18,14 +18,12 @@ def main(args):
         set_joint = Joint().joint[_joint]
         ballistic = select_data['select_data']
         impact_list = select_data['impact_list']
-        follor_throught = select_data['follor_throught']
 
         user = User(
             user_name=user_name,
             set_joint=set_joint,
             ballistic=ballistic,
             impact_list=impact_list,
-            last_frame=follor_throught,
             output=output
         )
 
@@ -42,7 +40,7 @@ def main(args):
             result_memd_list.append(result_memd)
 
         Nod = 6
-        resutl_hilbert_list = []
+        result_hilbert_list = []
 
         print('hilbert transform')
         for i, result_memd in tqdm(enumerate(result_memd_list)):
@@ -50,9 +48,9 @@ def main(args):
             result_ht.calc_means_norm()
             result_ht.set_freq_data(Nod=Nod, impact_number=impact_number[i])
             result_ht.set_amp_data(Nod=Nod, impact_number=impact_number[i])
-            resutl_hilbert_list.append(result_ht)
+            result_hilbert_list.append(result_ht)
 
-        freq_all_data, amp_norm_data = freq_amp_mean_norm(result_hilbert_list=resutl_hilbert_list)
+        freq_all_data, amp_norm_data = freq_amp_mean_norm(result_hilbert_list=result_hilbert_list)
 
         # create spectrum time
         frame = freq_all_data.shape[1]

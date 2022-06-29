@@ -4,7 +4,7 @@ import sys
 import numpy as np
 
 
-impact_number = ['first_impact', 'second_impact', 'third_impact', 'fourth_impact']
+impact_number = ['first_frame', 'second_frame', 'third_frame', 'fourth_frame']
 user_list = ['kimura', 'sugawara', 'hishiyama']
 
 class Kimura:
@@ -118,30 +118,29 @@ class Sugawara:
 class Hishiyama:
     def __init__(self) -> None:
         self.user_name = 'hishiyama'
+
+        # replace ..._impact -> ..._frame<list> [impact, frame number]
         self.half_slice_data = {
             'select_data' : 'half_slice',
-            'first_impact' : 175,
-            'second_impact' : 152,
-            'finish' : 287,
+            'first_frame' : [175, 299],
+            'second_frame' : [152, 277],
             'data_path' : [
                 '../data/hishiyama/half_swing/slice_data/half_swing_first_Take_001.bvh',
                 '../data/hishiyama/half_swing/slice_data/half_swing_second_Take_001.bvh'
             ]
         }
         self.half_slice_data['impact_list'] = np.array([
-            self.half_slice_data['first_impact'],
-            self.half_slice_data['second_impact']
+            self.half_slice_data['first_frame'],
+            self.half_slice_data['second_frame']
         ])
-        self.half_slice_data['min_frame'] = np.min(self.half_slice_data['impact_list'])
-        self.half_slice_data['follor_throught'] = self.half_slice_data['finish'] - self.half_slice_data['min_frame']
+        self.half_slice_data['min_top'], self.half_slice_data['min_follor_throught'] = self.min_frame(self.half_slice_data['impact_list'])
 
         self.half_straight_data = {
             'select_data' : 'half_straight',
-            'first_impact' : 170,
-            'second_impact' : 163,
-            'third_impact' : 134,
-            'fourth_impact' : 199,
-            'finish' : 166,
+            'first_frame' : [170, 301],
+            'second_frame' : [163, 334],
+            'third_frame' : [134, 299],
+            'fourth_frame' : [199, 258],
             'data_path' : [
                 '../data/hishiyama/half_swing/straight_data/half_swing_first_Take_001.bvh',
                 '../data/hishiyama/half_swing/straight_data/half_swing_fourth_Take_001.bvh',
@@ -150,18 +149,25 @@ class Hishiyama:
             ]
         }
         self.half_straight_data['impact_list'] = np.array([
-            self.half_straight_data['first_impact'],
-            self.half_straight_data['second_impact'],
-            self.half_straight_data['third_impact'],
-            self.half_straight_data['fourth_impact']
+            self.half_straight_data['first_frame'],
+            self.half_straight_data['second_frame'],
+            self.half_straight_data['third_frame'],
+            self.half_straight_data['fourth_frame']
         ])
-        self.half_straight_data['min_frame'] = np.min(self.half_straight_data['impact_list'])
-        self.half_straight_data['follor_throught'] = self.half_straight_data['finish'] - self.half_straight_data['min_frame']
+        self.half_straight_data['min_top'], self.half_straight_data['min_follor_throught'] = self.min_frame(self.half_straight_data['impact_list'])
 
         self.select_data = {
             'half_straight' : self.half_straight_data,
             'half_slice' : self.half_slice_data
         }
+
+    def min_frame(self, impact_list):
+        min_top = np.min(impact_list[:, 0])
+        _frame_list = np.array([
+            np.abs(frame - impact) for impact, frame in impact_list
+        ])
+        min_follor_throught = np.min(_frame_list)
+        return min_top, min_follor_throught
 
 
 def choice_user(user_name : str) -> object:

@@ -64,12 +64,12 @@ class HilbertTrans:
     def set_freq_data(self, Nod: int, impact_number: str):
         self.freq_data = self.freq_mean[
             :Nod,
-            self.select_data[impact_number] - self.select_data['min_frame'] : self.select_data[impact_number] + self.select_data['follor_throught']]
+            self.select_data[impact_number][0] - self.select_data['min_top'] : self.select_data[impact_number][0] + self.select_data['min_follor_throught']]
 
     def set_amp_data(self, Nod: int, impact_number: str):
         self.amp_data = self.amp_norm[
             :Nod,
-            self.select_data[impact_number] - self.select_data['min_frame'] : self.select_data[impact_number] + self.select_data['follor_throught']]
+            self.select_data[impact_number][0] - self.select_data['min_top'] : self.select_data[impact_number][0] + self.select_data['min_follor_throught']]
 
 
 def freq_amp_mean_norm(result_hilbert_list: List):
@@ -78,6 +78,8 @@ def freq_amp_mean_norm(result_hilbert_list: List):
     for data in result_hilbert_list:
         freq_list.append(data.freq_data)
         amp_list.append(data.amp_data)
+    
+    print(len(result_hilbert_list))
     
     freq_all_data = sum(freq_list) / len(result_hilbert_list)
     amp_all_data = sum(amp_list) / len(result_hilbert_list)
