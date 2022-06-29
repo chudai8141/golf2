@@ -18,14 +18,12 @@ def main(args):
         set_joint = Joint().joint[_joint]
         ballistic = select_data['select_data']
         impact_list = select_data['impact_list']
-        follor_throught = select_data['follor_throught']
 
         user = User(
             user_name=user_name,
             set_joint=set_joint,
             ballistic=ballistic,
             impact_list=impact_list,
-            last_frame=follor_throught,
             output=output
         )
 
