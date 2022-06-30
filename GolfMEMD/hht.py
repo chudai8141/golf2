@@ -8,10 +8,12 @@ from MEMD_all import memd
 import bvh
 import ht
 
+memd_times = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth']
 
-def get_data(data_path: str, set_joint: dict):
+
+def get_data(data_path: str):
     data, fs, text = bvh.bvhreader(data_path)
-    data = bvh.errc(data, set_joint['j_num'], set_joint['j_num']+3)
+    data = bvh.errc(data, 3, 180)
     dt = float(fs)
     return data, dt, text
 
