@@ -1,14 +1,16 @@
 import argparse
+import copy
 
 from tqdm import tqdm
 
 from joint import Joint
 from user_setting import impact_number, user_list ,choice_user
 from user import User
-from hht import get_data, MultEmpModeDeco, HilbertTrans, freq_amp_mean_norm, create_spectrum_time
+from hht import get_data, MultEmpModeDeco, HilbertTrans, freq_amp_mean_norm, create_spectrum_time, memd_times
 from plot import plot
 
 def main(args):
+    exist_memd = False
     for _joint in args.joint:
         output = args.output
         select_user = choice_user(args.user)
@@ -29,16 +31,24 @@ def main(args):
 
 
         # calculation memd
-        data_path = select_data['data_path']
-        result_memd_list = []
+        # if this code run first time, not exec memd at seconde time
 
-        print('caluculation memd', user.user, user.ballistic, user.joint_name)
-        for data in tqdm(data_path):
-            #
-            data, dt, text = get_data(data, set_joint)
-            result_memd = MultEmpModeDeco(data=data, dt=dt, set_joint=set_joint)
-            result_memd_list.append(result_memd)
+        print(f'calculation memd at {memd_times.pop(0)} times. {user.user} {user.ballistic} {user.joint_name}')
+        
+        if not exist_memd:
+            data_path = select_data['data_path']
+            result_memd_list = []
+            exist_memd = True
 
+            for data in tqdm(data_path):
+                #
+                data, dt, text = get_data(data)
+                result_memd = MultEmpModeDeco(data=data, dt=dt, set_joint=set_joint)
+                result_memd_list.append(result_memd)
+        else:
+            pass
+
+        
         Nod = 6
         result_hilbert_list = []
 
@@ -87,6 +97,19 @@ def main(args):
             select_data=select_data['select_data'],
             save_path=user.save_path
             )
+        
+        # plot(
+        #     spectrum_time=spectrum_time,
+        #     freq_all_data=freq_all_data,
+        #     amp_all_data=amp_norm_data,
+        #     Nod=Nod,
+        #     start=3,
+        #     end=Nod,
+        #     joint_name=set_joint,
+        #     select_data=select_data['select_data'],
+        #     save_path=user.save_path
+
+        # )
 
 
 
