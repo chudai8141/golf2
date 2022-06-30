@@ -32,10 +32,9 @@ def main(args):
 
         # calculation memd
         # if this code run first time, not exec memd at seconde time
-
-        print(f'calculation memd at {memd_times.pop(0)} times. {user.user} {user.ballistic} {user.joint_name}')
         
         if not exist_memd:
+            print(f'calculation memd at {memd_times.pop(0)} times.\n this analysis infomation is user:{user.user}, ballistic:{user.ballistic} joint:{user.joint_name}')
             data_path = select_data['data_path']
             result_memd_list = []
             exist_memd = True
@@ -46,8 +45,7 @@ def main(args):
                 result_memd = MultEmpModeDeco(data=data, dt=dt, set_joint=set_joint)
                 result_memd_list.append(result_memd)
         else:
-            pass
-
+            print(f'calculated memd.\n this analysis infomation is user:{user.user} ballistic:{user.ballistic} joint:{user.joint_name}')
         
         Nod = 6
         result_hilbert_list = []
