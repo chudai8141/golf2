@@ -81,8 +81,6 @@ def freq_amp_mean_norm(result_hilbert_list: List):
         freq_list.append(data.freq_data)
         amp_list.append(data.amp_data)
     
-    print(len(result_hilbert_list))
-    
     freq_all_data = sum(freq_list) / len(result_hilbert_list)
     amp_all_data = sum(amp_list) / len(result_hilbert_list)
     amp_norm_data = (amp_all_data - np.min(amp_all_data)) / (np.max(amp_all_data) - np.min(amp_all_data))
