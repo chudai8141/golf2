@@ -51,10 +51,10 @@ def bvhoutput(data, fs, name, l):
     with open(path_w) as f:
         ls = f.readlines()
    
-    n = data.shape[0];
-    
+    n = data.shape[0]
+
     tmp1 = "Frames: " + str(n)  + "\n"
-    tmp2 = "Frame Time: " + str(fs)
+    tmp2 = "Frame Time: " + str(fs) + '\n'
     lists = []
     lists.append(tmp1)
     lists.append(tmp2)

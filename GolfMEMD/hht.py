@@ -19,9 +19,10 @@ def get_data(data_path: str):
 
 
 class MultEmpModeDeco:
-    def __init__(self, data, dt, set_joint, flag_sep: bool=True):
+    def __init__(self, data, dt, text, set_joint, flag_sep: bool=True):
         self.data = data
         self.dt = dt
+        self.text = text
         self.joint = set_joint['j_num']
         self.joint_name = set_joint['j_name']
         self.get_memd()
