@@ -7,7 +7,7 @@ from joint import Joint
 from user_setting import impact_number, user_list ,choice_user
 from user import User
 from hht import get_data, MultEmpModeDeco, HilbertTrans, freq_amp_mean_norm, create_spectrum_time, memd_times
-from plot import plot
+from plot import plot, output_bvh
 
 def main(args):
     exist_memd = False
@@ -42,7 +42,7 @@ def main(args):
             for data in tqdm(data_path):
                 #
                 data, dt, text = get_data(data)
-                result_memd = MultEmpModeDeco(data=data, dt=dt, set_joint=set_joint)
+                result_memd = MultEmpModeDeco(user=user, data=data, dt=dt, text=text, set_joint=set_joint)
                 result_memd_list.append(result_memd)
         else:
             print(f'calculated memd.\n this analysis infomation is user:{user.user} ballistic:{user.ballistic} joint:{user.joint_name}')
@@ -66,6 +66,7 @@ def main(args):
 
         # output plot
         print('output plot')
+        user.output(output)
         for n in tqdm(range(1, Nod+1)):
             if n == 0:
                 continue
@@ -95,20 +96,10 @@ def main(args):
             select_data=select_data['select_data'],
             save_path=user.save_path
             )
-        
-        # plot(
-        #     spectrum_time=spectrum_time,
-        #     freq_all_data=freq_all_data,
-        #     amp_all_data=amp_norm_data,
-        #     Nod=Nod,
-        #     start=3,
-        #     end=Nod,
-        #     joint_name=set_joint,
-        #     select_data=select_data['select_data'],
-        #     save_path=user.save_path
-
-        # )
-
+    
+    # bvh output src
+    print('output bvh file with imf.')
+    output_bvh(result_memd_list=result_memd_list)
 
 
 

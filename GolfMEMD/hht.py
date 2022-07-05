@@ -19,7 +19,8 @@ def get_data(data_path: str):
 
 
 class MultEmpModeDeco:
-    def __init__(self, data, dt, text, set_joint, flag_sep: bool=True):
+    def __init__(self, user, data, dt, text, set_joint, flag_sep: bool=True):
+        self.user = user
         self.data = data
         self.dt = dt
         self.text = text
@@ -37,9 +38,6 @@ class MultEmpModeDeco:
         self.result_x = self.imf[:, self.joint, :]
         self.result_z = self.imf[:, self.joint+1, :]
         self.result_y = self.imf[:, self.joint+2, :]
-
-    def output_imf_bvh(self):
-        pass
         
 
 class HilbertTrans:
