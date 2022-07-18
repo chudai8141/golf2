@@ -133,7 +133,7 @@ class Hishiyama:
             self.half_slice_data['first_frame'],
             self.half_slice_data['second_frame']
         ])
-        self.half_slice_data['min_top'], self.half_slice_data['min_follor_throught'] = self.min_frame(self.half_slice_data['impact_list'])
+        self.half_slice_data['min_impact'], self.half_slice_data['min_follor_throught'] = self.min_frame(self.half_slice_data['impact_list'])
 
         self.half_straight_data = {
             'select_data' : 'half_straight',
@@ -154,7 +154,7 @@ class Hishiyama:
             self.half_straight_data['third_frame'],
             self.half_straight_data['fourth_frame']
         ])
-        self.half_straight_data['min_top'], self.half_straight_data['min_follor_throught'] = self.min_frame(self.half_straight_data['impact_list'])
+        self.half_straight_data['min_impact'], self.half_straight_data['min_follor_throught'] = self.min_frame(self.half_straight_data['impact_list'])
 
         self.select_data = {
             'half_straight' : self.half_straight_data,
@@ -162,12 +162,12 @@ class Hishiyama:
         }
 
     def min_frame(self, impact_list):
-        min_top = np.min(impact_list[:, 0])
+        min_impact = np.min(impact_list[:, 0])
         _frame_list = np.array([
             np.abs(frame - impact) for impact, frame in impact_list
         ])
         min_follor_throught = np.min(_frame_list)
-        return min_top, min_follor_throught
+        return min_impact, min_follor_throught
 
 
 def choice_user(user_name : str) -> object:
