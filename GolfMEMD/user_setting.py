@@ -122,8 +122,8 @@ class Hishiyama:
         # replace ..._impact -> ..._frame<list> [impact, frame number]
         self.half_slice_data = {
             'select_data' : 'half_slice',
-            'first_frame' : [175, 299],
-            'second_frame' : [152, 277],
+            'first_frame' : [233, 299],
+            'second_frame' : [210, 277],
             'data_path' : [
                 '../data/hishiyama/half_swing/slice_data/half_swing_first_Take_001.bvh',
                 '../data/hishiyama/half_swing/slice_data/half_swing_second_Take_001.bvh'
@@ -137,15 +137,15 @@ class Hishiyama:
 
         self.half_straight_data = {
             'select_data' : 'half_straight',
-            'first_frame' : [170, 301],
-            'second_frame' : [163, 334],
-            'third_frame' : [134, 299],
-            'fourth_frame' : [199, 258],
+            'first_frame' : [229, 301],
+            'second_frame' : [220, 298],
+            'third_frame' : [193, 258],
+            'fourth_frame' : [262, 334],
             'data_path' : [
                 '../data/hishiyama/half_swing/straight_data/half_swing_first_Take_001.bvh',
-                '../data/hishiyama/half_swing/straight_data/half_swing_fourth_Take_001.bvh',
                 '../data/hishiyama/half_swing/straight_data/half_swing_second_Take_001.bvh',
-                '../data/hishiyama/half_swing/straight_data/half_swing_third_Take_001.bvh'
+                '../data/hishiyama/half_swing/straight_data/half_swing_third_Take_001.bvh',
+                '../data/hishiyama/half_swing/straight_data/half_swing_fourth_Take_001.bvh'
             ]
         }
         self.half_straight_data['impact_list'] = np.array([
