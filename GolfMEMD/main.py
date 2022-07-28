@@ -79,6 +79,8 @@ def main(args):
             frame=frame,
             start=n-1,
             end=n,
+            vmin=0.5,
+            vmax=1,
             joint_name=set_joint['j_name'],
             select_data=select_data['select_data'],
             save_path=user.save_path
@@ -92,6 +94,8 @@ def main(args):
             frame=frame,
             start=0,
             end=n,
+            vmin=0,
+            vmax=10,
             joint_name=set_joint['j_name'],
             select_data=select_data['select_data'],
             save_path=user.save_path

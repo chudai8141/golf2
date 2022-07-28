@@ -2,6 +2,8 @@ from typing import Union, List
 
 import numpy as np
 from numpy import linalg as LA
+from joint import Joint
+from user import User
 
 import user_setting
 from MEMD_all import memd
@@ -38,6 +40,19 @@ class MultEmpModeDeco:
         self.result_x = self.imf[:, self.joint, :]
         self.result_z = self.imf[:, self.joint+1, :]
         self.result_y = self.imf[:, self.joint+2, :]
+    
+    def update_user(self, user: User):
+        self.user = user
+        print('Successful update of user.')
+    
+    def update_joint(self, set_joint: Joint):
+        past_joint = self.joint
+        past_joint_name = self.joint_name
+        self.joint = set_joint['j_num']
+        self.joint_name = set_joint['j_name']
+        print(f'before joint {past_joint}, {past_joint_name} -> update joint {self.joint}, {self.joint_name}.')
+        self.sep_dim()
+        print('Successful update of imf.')
         
 
 class HilbertTrans:
@@ -82,9 +97,12 @@ def freq_amp_mean_norm(result_hilbert_list: List):
     
     freq_all_data = sum(freq_list) / len(result_hilbert_list)
     amp_all_data = sum(amp_list) / len(result_hilbert_list)
-    amp_norm_data = (amp_all_data - np.min(amp_all_data)) / (np.max(amp_all_data) - np.min(amp_all_data))
+    print(np.min(amp_all_data))
+    print(np.max(amp_all_data))
+    # amp_norm_data = (amp_all_data - np.min(amp_all_data)) / (np.max(amp_all_data) - np.min(amp_all_data))
 
-    return freq_all_data, amp_norm_data
+    # return freq_all_data, amp_norm_data
+    return freq_all_data, amp_all_data
 
 def create_spectrum_time(Nod, frame, dt):
     spectrum_time = np.zeros((Nod, frame))

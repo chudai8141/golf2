@@ -31,14 +31,15 @@ class User():
         self.save_path = os.path.join(self.output_dir, self.user, self.ballistic, self.joint_name)
 
     def _update_joint(self, select_joint):
-        self.joint = select_joint
+        self.joint = select_joint['j_num']
+        self.joint_name = select_joint['j_name']
 
     def _update_ballistic(self, ballistic):
         self.ballistic = ballistic
 
     def update_content(self, select_joint=None, ballistic=None):
         if select_joint is not None:
-            self._update_joint(self, select_joint)
+            self._update_joint(select_joint)
         if ballistic is not None:
-            self._update_ballistic(self, ballistic)
+            self._update_ballistic(ballistic)
 

@@ -4,8 +4,8 @@ import sys
 import numpy as np
 
 
-impact_number = ['first_frame', 'second_frame', 'third_frame', 'fourth_frame']
-user_list = ['kimura', 'sugawara', 'hishiyama']
+impact_number = ['first_frame', 'second_frame', 'third_frame', 'fourth_frame', 'fifth_frame', 'sixth_frame', 'seventh_frame', 'eighth_frame', 'ninght_frame']
+user_list = ['kimura', 'sugawara', 'hishiyama'] 
 
 class Kimura:
     def __init__(self):
@@ -120,39 +120,59 @@ class Hishiyama:
         self.user_name = 'hishiyama'
 
         # replace ..._impact -> ..._frame<list> [impact, frame number]
+        #
         self.half_slice_data = {
             'select_data' : 'half_slice',
-            'first_frame' : [233, 299],
-            'second_frame' : [210, 277],
+            'first_frame' : [199, 257],
+            'second_frame' : [192, 265],
+            'third_frame' : [216, 277],
+            'fourth_frame' : [201, 270],
+            'fifth_frame' : [215, 278],
+            'sixth_frame' : [194, 272],
             'data_path' : [
-                '../data/hishiyama/half_swing/slice_data/half_swing_first_Take_001.bvh',
-                '../data/hishiyama/half_swing/slice_data/half_swing_second_Take_001.bvh'
+                '../data/hishiyama/half_swing_2/slice_data/first_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/slice_data/second_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/slice_data/third_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/slice_data/fourth_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/slice_data/fifth_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/slice_data/sixth_Take_001.bvh'
             ]
         }
         self.half_slice_data['impact_list'] = np.array([
             self.half_slice_data['first_frame'],
-            self.half_slice_data['second_frame']
+            self.half_slice_data['second_frame'],
+            self.half_slice_data['third_frame'],
+            self.half_slice_data['fourth_frame'],
+            self.half_slice_data['fifth_frame'],
+            self.half_slice_data['sixth_frame'],
         ])
         self.half_slice_data['min_impact'], self.half_slice_data['min_follor_throught'] = self.min_frame(self.half_slice_data['impact_list'])
 
         self.half_straight_data = {
             'select_data' : 'half_straight',
-            'first_frame' : [229, 301],
-            'second_frame' : [220, 298],
-            'third_frame' : [193, 258],
-            'fourth_frame' : [262, 334],
+            'first_frame' : [192, 256],
+            'second_frame' : [206, 267],
+            'third_frame' : [226, 301],
+            'fourth_frame' : [207, 273],
+            'fifth_frame' : [208, 271],
+            'sixth_frame' : [183, 253],
+            #              
             'data_path' : [
-                '../data/hishiyama/half_swing/straight_data/half_swing_first_Take_001.bvh',
-                '../data/hishiyama/half_swing/straight_data/half_swing_second_Take_001.bvh',
-                '../data/hishiyama/half_swing/straight_data/half_swing_third_Take_001.bvh',
-                '../data/hishiyama/half_swing/straight_data/half_swing_fourth_Take_001.bvh'
+                '../data/hishiyama/half_swing_2/straight_data/first_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/straight_data/second_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/straight_data/third_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/straight_data/fourth_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/straight_data/fifth_Take_001.bvh',
+                '../data/hishiyama/half_swing_2/straight_data/sixth_Take_001.bvh'
             ]
         }
         self.half_straight_data['impact_list'] = np.array([
             self.half_straight_data['first_frame'],
             self.half_straight_data['second_frame'],
             self.half_straight_data['third_frame'],
-            self.half_straight_data['fourth_frame']
+            self.half_straight_data['fourth_frame'],
+            self.half_straight_data['fifth_frame'],
+            self.half_straight_data['sixth_frame'],
         ])
         self.half_straight_data['min_impact'], self.half_straight_data['min_follor_throught'] = self.min_frame(self.half_straight_data['impact_list'])
 
