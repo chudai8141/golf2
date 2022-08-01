@@ -22,6 +22,7 @@ def plot (
     joint_name,
     select_data,
     save_path,
+    vflag=False,
     ymin = 0,
     ymax = 10
 ):
@@ -30,17 +31,20 @@ def plot (
     plt.rcParams['font.family'] = 'Times new Roman'
     plt.rcParams['font.size'] = 30
     for n in range(start, end):
-        # 正規化あり
-        # plt.scatter(spectrum_time[n, :], freq_all_data[n, :], s = 100, c=amp_all_data[n, :frame], cmap='jet', vmin=vmin, vmax=vmax)
-        # 正規化なし
-        plt.scatter(spectrum_time[n, :], freq_all_data[n, :], s = 100, c=amp_all_data[n, :frame], cmap='jet')
+        # vflag : clorobarに設定を入れたい時
+        if vflag:
+            plt.scatter(spectrum_time[n, :], freq_all_data[n, :], s = 100, c=amp_all_data[n, :frame], cmap='jet', vmin=vmin, vmax=vmax)
+        # no vflag
+        else:
+            plt.scatter(spectrum_time[n, :], freq_all_data[n, :], s = 100, c=amp_all_data[n, :frame], cmap='jet')
     ax = plt.gca()
     ax.set_facecolor('white')
     plt.ylim(ymin, ymax)
     plt.xlabel('time [s]')
     plt.ylabel('frequency [Hz]')
     plt.colorbar()
-    # plt.clim(0.5, 1)
+    if vflag:
+        plt.clim(vmin, vmax)
     file_name = '_'.join(imf_name[start:end])
     # print('save figure', os.path.join(save_path, file_name) )
     plt.savefig(os.path.join(save_path, file_name))
