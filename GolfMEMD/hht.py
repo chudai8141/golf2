@@ -35,6 +35,7 @@ class MultEmpModeDeco:
     
     def get_memd(self):
         self.imf = memd(self.data)
+        self.Nod = self.imf.shape[0]
 
     def sep_dim(self):
         self.result_x = self.imf[:, self.joint, :]
@@ -56,7 +57,7 @@ class MultEmpModeDeco:
         
 
 class HilbertTrans:
-    def __init__(self, result_memd: MultEmpModeDeco, select_data: Union[user_setting.Kimura, user_setting.Sugawara]):
+    def __init__(self, result_memd: MultEmpModeDeco, select_data: Union[user_setting.Kimura, user_setting.Sugawara, user_setting.Hishiyama, user_setting.Ikuno]):
         self.result = result_memd
         self.select_data = select_data
         self.hilbert_transform()
