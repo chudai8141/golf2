@@ -24,7 +24,10 @@ def plot (
     save_path,
     vflag=False,
     ymin = 0,
-    ymax = 10
+    ymax = 10,
+    vline_flag=True,
+    top_line=0,
+    impact_line=0
 ):
     plt.clf()
     plt.figure(dpi=200, figsize=(16, 9))
@@ -42,6 +45,10 @@ def plot (
     plt.ylim(ymin, ymax)
     plt.xlabel('time [s]')
     plt.ylabel('frequency [Hz]')
+    # vline
+    if vline_flag:
+        plt.vlines(x=top_line, ymin=ymin, ymax=ymax, colors='g', linestyles='solid')
+        plt.vlines(x=impact_line, ymin=ymin, ymax=ymax, colors='r', linestyles='solid')
     plt.colorbar()
     if vflag:
         plt.clim(vmin, vmax)
