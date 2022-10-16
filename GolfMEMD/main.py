@@ -47,7 +47,7 @@ def main(args):
         else:
             print(f'calculated memd.\n this analysis infomation is user:{user.user} ballistic:{user.ballistic} joint:{user.joint_name}')
         
-        Nod = 6
+        Nod = 5
         result_hilbert_list = []
 
         print('hilbert transform')
@@ -109,7 +109,6 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input', help='input bvh file data', default=None)
     parser.add_argument('-o', '--output', help='output path', default='output_image')
     parser.add_argument('-u', '--user', help='choice the user want to analyze s', choices=user_list)
     parser.add_argument('-d', '--data', help='select data (straight_data, half_staraight, ...)')
