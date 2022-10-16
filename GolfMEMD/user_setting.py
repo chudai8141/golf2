@@ -5,7 +5,7 @@ import numpy as np
 
 
 impact_number = ['first_frame', 'second_frame', 'third_frame', 'fourth_frame', 'fifth_frame', 'sixth_frame', 'seventh_frame', 'eighth_frame', 'ninght_frame']
-user_list = ['kimura', 'sugawara', 'hishiyama'] 
+user_list = ['kimura', 'sugawara', 'hishiyama', 'ikuno']
 
 class Kimura:
     def __init__(self):
@@ -189,6 +189,108 @@ class Hishiyama:
         min_follor_throught = np.min(_frame_list)
         return min_impact, min_follor_throught
 
+class Ikuno:
+    def __init__(self) -> None:
+        self.user_name = 'ikuno'
+
+        self.straight_data = {
+            'select_data' : 'straight_data',
+            'first_frame' : [141, 218],
+            'second_frame' : [144, 221],
+            'third_frame' : [142, 227],
+            'fourth_frame' : [169, 245],
+            'fifth_frame' : [158, 246],
+            'sixth_frame' : [155, 230],
+            #
+            'data_path' : [
+                '../data/ikuno/straight/straight_1_Take_001.bvh',
+                '../data/ikuno/straight/straight_2_Take_001.bvh',
+                '../data/ikuno/straight/straight_3_Take_001.bvh',
+                '../data/ikuno/straight/straight_4_Take_001.bvh',
+                '../data/ikuno/straight/straight_5_Take_001.bvh',
+                '../data/ikuno/straight/straight_6_Take_001.bvh'
+            ]
+        }
+        self.straight_data['impact_list'] = np.array([
+            self.straight_data['first_frame'],
+            self.straight_data['second_frame'],
+            self.straight_data['third_frame'],
+            self.straight_data['fourth_frame'],
+            self.straight_data['fifth_frame'],
+            self.straight_data['sixth_frame'],
+        ])
+        self.straight_data['min_impact'], self.straight_data['min_follor_throught'] = self.min_frame(self.straight_data['impact_list'])
+
+        self.headup_data = {
+            'select_data' : 'headup_data',
+            'first_frame' : [137, 232],
+            'second_frame' : [132, 216],
+            'third_frame' : [136, 220],
+            'fourth_frame' : [142, 230],
+            'fifth_frame' : [140, 224],
+            'sixth_frame' : [136, 246],
+            #
+            'data_path' : [
+                '../data/ikuno/slice_headup/headup_1_Take_001.bvh',
+                '../data/ikuno/slice_headup/headup_2_Take_001.bvh',
+                '../data/ikuno/slice_headup/headup_3_Take_001.bvh',
+                '../data/ikuno/slice_headup/headup_4_Take_001.bvh',
+                '../data/ikuno/slice_headup/headup_5_Take_001.bvh',
+                '../data/ikuno/slice_headup/headup_6_Take_001.bvh',
+            ]
+        }
+        self.headup_data['impact_list'] = np.array([
+            self.headup_data['first_frame'],
+            self.headup_data['second_frame'],
+            self.headup_data['third_frame'],
+            self.headup_data['fourth_frame'],
+            self.headup_data['fifth_frame'],
+            self.headup_data['sixth_frame'],
+        ])
+        self.headup_data['min_impact'], self.headup_data['min_follor_throught'] = self.min_frame(self.headup_data['impact_list'])
+
+        self.opening_data = {
+            'select_data' : 'openign_data',
+            'first_frame' : [135, 230],
+            'second_frame' : [138, 236],
+            'third_frame' : [140, 254],
+            'fourth_frame' : [133, 226],
+            'fifth_frame' : [135, 194],
+            'sixth_frame' : [129, 224],
+            'data_path' : [
+                '../data/ikuno/slice_opening/opening_1_Take_001.bvh',
+                '../data/ikuno/slice_opening/opening_2_Take_001.bvh',
+                '../data/ikuno/slice_opening/opening_3_Take_001.bvh',
+                '../data/ikuno/slice_opening/opening_4_Take_001.bvh',
+                '../data/ikuno/slice_opening/opening_5_Take_001.bvh',
+                '../data/ikuno/slice_opening/opening_6_Take_001.bvh',
+            ]
+        }
+        self.opening_data['impact_list'] = np.array([
+            self.opening_data['first_frame'],
+            self.opening_data['second_frame'],
+            self.opening_data['third_frame'],
+            self.opening_data['fourth_frame'],
+            self.opening_data['fifth_frame'],
+            self.opening_data['sixth_frame'],
+        ])
+        self.opening_data['min_impact'], self.opening_data['min_follor_throught'] = self.min_frame(self.opening_data['impact_list'])
+        #
+        self.select_data = {
+            'straight_data' : self.straight_data,
+            'headup_data' : self.headup_data,
+            'opening_data' : self.opening_data
+        }
+
+    def min_frame(self, impact_list):
+        min_impact = np.min(impact_list[:, 0])
+        _frame_list = np.array([
+            np.abs(frame - impact) for impact, frame in impact_list
+            ])
+        min_follor_throught = np.min(_frame_list)
+        return min_impact, min_follor_throught
+
+
 
 def choice_user(user_name : str) -> object:
     if user_name == 'kimura':
@@ -197,6 +299,8 @@ def choice_user(user_name : str) -> object:
         return Sugawara()
     if user_name == 'hishiyama':
         return Hishiyama()
+    if user_name == 'ikuno':
+        return Ikuno()
     if user_name is None:
         print('choice user')
         sys.exit()
