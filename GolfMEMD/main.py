@@ -7,6 +7,7 @@ from joint import Joint
 from user_setting import impact_number, user_list ,choice_user
 from user import User
 from hht import get_data, MultEmpModeDeco, HilbertTrans, freq_amp_mean_norm, create_spectrum_time, memd_times
+from MEMD_all import wafa
 from plot import plot, output_bvh
 
 def main(args):
@@ -47,7 +48,7 @@ def main(args):
         else:
             print(f'calculated memd.\n this analysis infomation is user:{user.user} ballistic:{user.ballistic} joint:{user.joint_name}')
         
-        Nod = 5
+        Nod = 4
         result_hilbert_list = []
 
         print('hilbert transform')
@@ -59,6 +60,8 @@ def main(args):
             result_hilbert_list.append(result_ht)
 
         freq_all_data, amp_norm_data = freq_amp_mean_norm(result_hilbert_list=result_hilbert_list)
+        # smoothing wafa
+        freq_all_data_wafa = wafa(freq_all_data, amp_norm_data, m=3)
 
         # create spectrum time
         frame = freq_all_data.shape[1]
@@ -73,7 +76,7 @@ def main(args):
 
             plot(
             spectrum_time=spectrum_time,
-            freq_all_data=freq_all_data,
+            freq_all_data=freq_all_data_wafa,
             amp_all_data=amp_norm_data,
             Nod=Nod,
             frame=frame,
@@ -88,7 +91,7 @@ def main(args):
 
             plot(
             spectrum_time=spectrum_time,
-            freq_all_data=freq_all_data,
+            freq_all_data=freq_all_data_wafa,
             amp_all_data=amp_norm_data,
             Nod=Nod,
             frame=frame,
@@ -98,7 +101,13 @@ def main(args):
             vmax=10,
             joint_name=set_joint['j_name'],
             select_data=select_data['select_data'],
-            save_path=user.save_path
+            save_path=user.save_path,
+            vflag=False,
+            ymin=0,
+            ymax=40,
+            vline_flag=True,
+            top_line=select_data['top_line']/120,
+            impact_line=select_data["min_impact"]/120
             )
     
     # bvh output src

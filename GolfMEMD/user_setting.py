@@ -220,6 +220,7 @@ class Ikuno:
             self.straight_data['sixth_frame'],
         ])
         self.straight_data['min_impact'], self.straight_data['min_follor_throught'] = self.min_frame(self.straight_data['impact_list'])
+        self.straight_data['top_line'] = 102
 
         self.headup_data = {
             'select_data' : 'headup_data',
@@ -248,6 +249,7 @@ class Ikuno:
             self.headup_data['sixth_frame'],
         ])
         self.headup_data['min_impact'], self.headup_data['min_follor_throught'] = self.min_frame(self.headup_data['impact_list'])
+        self.headup_data['top_line'] = 96
 
         self.opening_data = {
             'select_data' : 'openign_data',
@@ -275,6 +277,7 @@ class Ikuno:
             self.opening_data['sixth_frame'],
         ])
         self.opening_data['min_impact'], self.opening_data['min_follor_throught'] = self.min_frame(self.opening_data['impact_list'])
+        self.opening_data['top_line'] = 97
         #
         self.select_data = {
             'straight_data' : self.straight_data,
