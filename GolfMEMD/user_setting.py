@@ -252,7 +252,7 @@ class Ikuno:
         self.headup_data['top_line'] = 96
 
         self.opening_data = {
-            'select_data' : 'openign_data',
+            'select_data' : 'opening_data',
             'first_frame' : [135, 230],
             'second_frame' : [138, 236],
             'third_frame' : [140, 254],
