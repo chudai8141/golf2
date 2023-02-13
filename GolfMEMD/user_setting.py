@@ -203,12 +203,12 @@ class Ikuno:
             'sixth_frame' : [155, 230],
             #
             'data_path' : [
-                '../data/ikuno/straight/straight_1_Take_001.bvh',
-                '../data/ikuno/straight/straight_2_Take_001.bvh',
-                '../data/ikuno/straight/straight_3_Take_001.bvh',
-                '../data/ikuno/straight/straight_4_Take_001.bvh',
-                '../data/ikuno/straight/straight_5_Take_001.bvh',
-                '../data/ikuno/straight/straight_6_Take_001.bvh'
+                '../data/ikuno/straight_data/straight_1_Take_001.bvh',
+                '../data/ikuno/straight_data/straight_2_Take_001.bvh',
+                '../data/ikuno/straight_data/straight_3_Take_001.bvh',
+                '../data/ikuno/straight_data/straight_4_Take_001.bvh',
+                '../data/ikuno/straight_data/straight_5_Take_001.bvh',
+                '../data/ikuno/straight_data/straight_6_Take_001.bvh'
             ]
         }
         self.straight_data['impact_list'] = np.array([
@@ -294,6 +294,41 @@ class Ikuno:
         return min_impact, min_follor_throught
 
 
+class Kurihara:
+    def __init__(self):
+        self.user_name = 'kurihara'
+
+        self.straight_data = {
+            'select_data' : 'straight_data',
+            'first_frame' : [141, 218],
+            # 'second_frame' : [144, 221],
+            # 'third_frame' : [142, 227],
+            # 'fourth_frame' : [169, 245],
+            # 'fifth_frame' : [158, 246],
+            # 'sixth_frame' : [155, 230],
+            #
+            'data_path' : [
+                '../data/kurihara/straight_data/straight_1_Take_001.bvh' # データ追加後, つける
+                # '../data/ikuno/straight_data/straight_2_Take_001.bvh',
+                # '../data/ikuno/straight_data/straight_3_Take_001.bvh',
+                # '../data/ikuno/straight_data/straight_4_Take_001.bvh',
+                # '../data/ikuno/straight_data/straight_5_Take_001.bvh',
+                # '../data/ikuno/straight_data/straight_6_Take_001.bvh'
+            ]
+        }
+        # self.straight_data['impact_list'] = np.array([
+        #     self.straight_data['first_frame'],
+        #     self.straight_data['second_frame'],
+        #     self.straight_data['third_frame'],
+        #     self.straight_data['fourth_frame'],
+        #     self.straight_data['fifth_frame'],
+        #     self.straight_data['sixth_frame'],
+        # ])
+        # self.straight_data['min_impact'], self.straight_data['min_follor_throught'] = self.min_frame(self.straight_data['impact_list'])
+        # self.straight_data['top_line'] = 102
+    
+
+
 
 def choice_user(user_name : str) -> object:
     if user_name == 'kimura':
@@ -304,6 +339,8 @@ def choice_user(user_name : str) -> object:
         return Hishiyama()
     if user_name == 'ikuno':
         return Ikuno()
+    if user_name == 'kurihara':
+        return Kurihara()
     if user_name is None:
         print('choice user')
         sys.exit()
